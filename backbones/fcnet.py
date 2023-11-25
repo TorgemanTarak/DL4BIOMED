@@ -38,9 +38,9 @@ class EnFCNet(nn.Module):
         indices = np.arange(x_dim)
 
         self.go_mask = []
-        self.go_mask.append(np.random.sample(indices, size=100))
-        self.go_mask.append(np.random.sample(indices, size=100))
-        self.go_mask.append(np.random.sample(indices, size=100))
+        self.go_mask.append(np.random.choice(indices, size=100, replace=False))
+        self.go_mask.append(np.random.choice(indices, size=100, replace=False))
+        self.go_mask.append(np.random.choice(indices, size=100, replace=False))
 
         # self.go_mask = go_mask
 
