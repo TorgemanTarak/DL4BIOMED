@@ -1,5 +1,7 @@
 import torch
 from torch import nn as nn
+import random
+import numpy as np
 
 from backbones.blocks import full_block, full_block_fw
 
@@ -29,11 +31,18 @@ class FCNet(nn.Module):
 
 class EnFCNet(nn.Module):
 
-    def __init__(self, x_dim, go_mask, hid_dim=64, z_dim=64, dropout=0.2):
-        super(EnFCNet, self).__init__()
+    # def __init__(self, x_dim, go_mask, hid_dim=64, z_dim=64, dropout=0.2):
+    def __init__(self, x_dim, hid_dim=64, z_dim=64, dropout=0.2):
+        super(EnFCNet, self).__init__() 
 
-        # self.go_mask = generate_simple_go_mask(x_dim=x_dim, num_GOs=3) # for testing
-        self.go_mask = go_mask
+        indices = np.arange(x_dim)
+
+        self.go_mask = []
+        self.go_mask.append(np.random.sample(indices, size=100))
+        self.go_mask.append(np.random.sample(indices, size=100))
+        self.go_mask.append(np.random.sample(indices, size=100))
+
+        # self.go_mask = go_mask
 
         self.num_GOs = len(self.go_mask)
         self.masks = None
@@ -46,14 +55,17 @@ class EnFCNet(nn.Module):
         self.bn1 = nn.BatchNorm1d(self.num_GOs + 1)
         self.bn2 = nn.BatchNorm1d(self.num_GOs + 1)
         self.final_feat_dim = z_dim
-
+        self.bool = True
+        
     def generate_masks(self, x):
         batch, num_genes = x.shape
         self.masks = torch.zeros(self.num_GOs + 1, batch, num_genes)
         for i, genes in enumerate(self.go_mask):
             self.masks[i, :, genes] = 1
         selected_genes = torch.sum(self.masks[:, 0, :], axis=0)
-        self.masks[-1, :, :] = 1
+
+        # Add concept vector that has all genes        
+        # self.masks[-1, :, :] = 1
 
     def forward(self, x):
         batch, num_genes = x.shape
@@ -61,10 +73,19 @@ class EnFCNet(nn.Module):
         if self.masks is None or self.masks.shape[1] != batch:
             self.generate_masks(x)
             self.masks = self.masks.to(x.device)
+        
         # x before applying mask: (batch, numGenes)
         x = x.view(1, batch, -1)
         # x after applying mask: (numGOs, batch, numGenes)
         x = self.masks * x
+
+        if self.bool:
+            print(x.shape)
+            print((x !=0).sum()/batch)
+            print(self.masks.shape)
+            print("AAAAAAAAAAAAAAAAAAa")
+            self.bool = False
+
         # change to (batch, numGOs, numGenes)
         x = x.permute(1, 2, 0)
         x = self.conv1(x)

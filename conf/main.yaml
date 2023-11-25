@@ -1,11 +1,11 @@
 defaults:
   - dataset: tabula_muris
-  - method: maml
+  - method: comet
 
-model: FCNet
-n_way: ???
-n_shot: ???
-n_query: ???
+model: EnFCNet
+n_way: 5
+n_shot: 5
+n_query: 5
 
 mode: train
 
@@ -28,8 +28,8 @@ checkpoint:
   time: latest
 
 wandb:
-  project: ???
-  entity: ???
-  mode: "online" # Can set to offline, disabled
+  project: "a"
+  entity: "a"
+  mode: "offline" # Can set to offline, disabled
 
-iter_num: 600
+iter_num: 300

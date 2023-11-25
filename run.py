@@ -10,6 +10,7 @@ from utils.io_utils import get_resume_file, hydra_setup, fix_seed, model_to_dict
 
 
 def initialize_dataset_model(cfg):
+
     # Instantiate train dataset as specified in dataset config under simple_cls or set_cls
     if cfg.method.type == "baseline":
         train_dataset = instantiate(cfg.dataset.simple_cls, batch_size=cfg.method.train_batch, mode='train')
@@ -32,7 +33,7 @@ def initialize_dataset_model(cfg):
         backbone = instantiate(cfg.backbone, x_dim=train_dataset.dim, fast_weight=True)
     else:
         backbone = instantiate(cfg.backbone, x_dim=train_dataset.dim)
-
+    
     # Instantiate few-shot method class
     model = instantiate(cfg.method.cls, backbone=backbone)
 

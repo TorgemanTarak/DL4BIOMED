@@ -1,0 +1,7 @@
+data/swissprot
+data/tabula_muris
+outputs
+wandb
+checkpoints
+*.pyc
+*.pyo
