@@ -15,13 +15,11 @@ backbone:
   _target_: backbones.fcnet.EnFCNet
 
 concept_mask:
-  _target_: datasets.cell.concept_get.LinkageConcepts
-  n_clusters: 5
-  linkage_path: data/comet/tabula_muris/linkage.pt
+  _target_: datasets.cell.concept_get.PCAConcepts
+  n_concepts: 5
+  data_path: data/comet/tabula_muris/TM_PCA_components.pt
   n_feats: 2866
-
-
-
+  pca_top_k: 400
 
 
 # For baseline, how many total classes
