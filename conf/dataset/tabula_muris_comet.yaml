@@ -15,7 +15,7 @@ backbone:
   _target_: backbones.fcnet.EnFCNet
 
 concept_mask:
-  _target_: datasets.cell.concept_get.PCAConcepts
+  _target_: datasets.cell.concept_gen.PCAConcepts
   n_concepts: 5
   data_path: data/comet/tabula_muris/TM_PCA_components.pt
   n_feats: 2866
