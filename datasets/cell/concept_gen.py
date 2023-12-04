@@ -40,3 +40,12 @@ class PCAConcepts:
       concepts[i, indices] = 1
     
     self.mask = concepts
+
+class NoConcepts:
+    def __init__(self, n_concepts, data_path, n_feats, **kwargs):
+        self.mask = np.zeros((1, n_feats))
+
+class RandomConcepts:
+    
+    def __init__(self, n_concepts, data_path, n_feats, **kwargs):
+        self.mask = np.random.randint(2, size=(n_concepts, n_feats))
