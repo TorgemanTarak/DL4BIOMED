@@ -31,18 +31,10 @@ class FCNet(nn.Module):
 
 class EnFCNet(nn.Module):
 
-    # def __init__(self, x_dim, go_mask, hid_dim=64, z_dim=64, dropout=0.2):
-    def __init__(self, x_dim, hid_dim=64, z_dim=64, dropout=0.2):
+    def __init__(self, x_dim, go_mask, hid_dim=64, z_dim=64, dropout=0.2):
         super(EnFCNet, self).__init__() 
 
-        indices = np.arange(x_dim)
-
-        self.go_mask = []
-        self.go_mask.append(np.random.choice(indices, size=100, replace=False))
-        self.go_mask.append(np.random.choice(indices, size=100, replace=False))
-        self.go_mask.append(np.random.choice(indices, size=100, replace=False))
-
-        # self.go_mask = go_mask
+        self.go_mask = go_mask
 
         self.num_GOs = len(self.go_mask)
         self.masks = None
