@@ -44,8 +44,8 @@ class EnFCNet(nn.Module):
         self.conv2 = nn.Conv1d(hid_dim, z_dim, 1, bias=True)
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=dropout)
-        self.bn1 = nn.BatchNorm1d(self.num_GOs + 1)
-        self.bn2 = nn.BatchNorm1d(self.num_GOs + 1)
+        self.bn1 = nn.BatchNorm1d(self.num_GOs)
+        self.bn2 = nn.BatchNorm1d(self.num_GOs)
         self.final_feat_dim = z_dim
         self.bool = True
         
