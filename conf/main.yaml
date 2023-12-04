@@ -32,4 +32,4 @@ wandb:
   entity: "a"
   mode: "offline" # Can set to offline, disabled
 
-iter_num: 300
+iter_num: 600
