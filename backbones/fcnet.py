@@ -51,13 +51,10 @@ class EnFCNet(nn.Module):
         
     def generate_masks(self, x):
         batch, num_genes = x.shape
-        self.masks = torch.zeros(self.num_GOs + 1, batch, num_genes)
+        self.masks = torch.zeros(self.num_GOs, batch, num_genes)
         for i, genes in enumerate(self.go_mask):
             self.masks[i, :, genes] = 1
         selected_genes = torch.sum(self.masks[:, 0, :], axis=0)
-
-        # Add concept vector that has all genes        
-        # self.masks[-1, :, :] = 1
 
     def forward(self, x):
         batch, num_genes = x.shape
