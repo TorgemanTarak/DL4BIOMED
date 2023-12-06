@@ -35,7 +35,7 @@ class PCAConcepts:
     mask = []
 
     for i in range(n_concepts):
-      indices = np.argpartition(pca_components[i], -pca_top_k)[-pca_top_k:]
+      indices = np.argpartition(np.abs(pca_components[i]), -pca_top_k)[-pca_top_k:]
       mask.append(indices)
     
     self.mask = mask
