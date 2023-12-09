@@ -5,7 +5,7 @@ defaults:
 model: EnFCNet
 n_way: 5
 n_shot: 5
-n_query: 5
+n_query: 16
 
 mode: train
 

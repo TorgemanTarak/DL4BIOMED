@@ -29,13 +29,13 @@ class LinkageConcepts:
 
 class PCAConcepts:
 
-  def __init__(self, n_concepts, data_path, n_feats, pca_top_k,**kwargs):
+  def __init__(self, n_concepts, data_path, n_feats, top_k,**kwargs):
     pca_components = torch.load(data_path)
     
     mask = []
 
     for i in range(n_concepts):
-      indices = np.argpartition(np.abs(pca_components[i]), -pca_top_k)[-pca_top_k:]
+      indices = np.argpartition(np.abs(pca_components[i]), -top_k)[-top_k:]
       mask.append(indices)
     
     self.mask = mask
@@ -46,5 +46,11 @@ class NoConcepts:
 
 class RandomConcepts:
     
-    def __init__(self, n_concepts, data_path, n_feats, **kwargs):
-        self.mask = np.random.choice(n_feats, size=(n_concepts, 1), replace=False)
+    def __init__(self, n_concepts, data_path, n_feats, top_k, **kwargs):
+      mask = []
+      for i in range(n_concepts):
+        mask.append(
+            np.random.choice(n_feats, size=(top_k), replace=False)
+        )
+
+        self.mask = mask
