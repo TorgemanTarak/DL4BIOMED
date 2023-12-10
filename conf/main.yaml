@@ -1,5 +1,5 @@
 defaults:
-  - dataset: tabula_muris_comet
+  - dataset: swissprot
   - method: comet
 
 model: EnFCNet
