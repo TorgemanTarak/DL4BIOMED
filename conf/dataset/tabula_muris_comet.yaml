@@ -20,6 +20,7 @@ concept_mask:
   data_path: data/comet/tabula_muris/TM_PCA_components.pt
   n_feats: 2866
   top_k: 400
+  type: original_comet
 
 
 # For baseline, how many total classes
