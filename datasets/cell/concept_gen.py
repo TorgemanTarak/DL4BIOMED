@@ -41,8 +41,8 @@ class PCAConcepts:
     self.mask = mask
 
 class NoConcepts:
-    def __init__(self, n_concepts, data_path, n_feats, **kwargs):
-        self.mask = np.arange(n_concepts).reshape(1, n_concepts)
+    def __init__(self, n_feats, **kwargs):
+        self.mask = np.arange(n_feats).reshape(1, n_feats)
 
 class RandomConcepts:
     
