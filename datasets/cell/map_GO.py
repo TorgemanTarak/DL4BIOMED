@@ -127,7 +127,7 @@ def map_mgi2go(filepath):
 
 
 def get_go2gene(adata, GO_min_genes=500, GO_max_genes=None, GO_min_level=3, GO_max_level=3,
-                                       data_dir='./filelists/tabula_muris/'):
+                                       data_dir='data/tabula_muris'):
     """
     Returns processed tabula muris data in AnnData format.
     GO_min_genes: minimum number of genes assigned to GO required to keep GO term, used only if data is separated by GO
