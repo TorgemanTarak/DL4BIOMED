@@ -33,9 +33,12 @@ def initialize_dataset_model(cfg):
         backbone = instantiate(cfg.backbone, x_dim=train_dataset.dim, fast_weight=True)
         
     elif cfg.method.name == "comet":
-        concept_masker = instantiate(cfg.concept_mask)
-        concept_mask = concept_masker.mask
-        backbone = instantiate(cfg.backbone, x_dim=train_dataset.dim, go_mask=concept_mask)
+        if cfg.concept_mask.type == "original_comet":
+            backbone = instantiate(cfg.backbone, x_dim=train_dataset.dim, go_mask=train_dataset.go_mask)
+        else:
+            concept_masker = instantiate(cfg.concept_mask)
+            concept_mask = concept_masker.mask
+            backbone = instantiate(cfg.backbone, x_dim=train_dataset.dim, go_mask=concept_mask)
     else:
         backbone = instantiate(cfg.backbone, x_dim=train_dataset.dim)
     
