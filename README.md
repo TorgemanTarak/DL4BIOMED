@@ -9,11 +9,15 @@ python run.py exp.name=swissprot_pca_5shot method=comet dataset=swissprot_comet 
 python run.py exp.name=tm_pca_5shot method=comet dataset=tabula_muris_comet mode=train 
 ```
 in order to change how the concepts are create you will have to edit conf/dataset/swissprot_comet.yaml and conf/dataset/tabula_muris_comet.yaml by changing the following fields:
+
 for swissprot
+
  _target_: datasets.prot.concept_gen.LinkageConcepts
   
   data_path: data/comet/swissprot/linkage.pt
+  
 for tabulas muris
+
   _target_: datasets.cell.concept_gen.PCAConcepts
   
   data_path: data/comet/tabula_muris/TM_PCA_components.pt
