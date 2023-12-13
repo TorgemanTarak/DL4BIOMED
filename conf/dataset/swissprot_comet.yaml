@@ -1,0 +1,30 @@
+# @package _global_
+
+defaults:
+  - classification_base
+
+dataset:
+  name: swissprot_comet
+  simple_cls:
+    _target_: datasets.prot.swissprot.SPSimpleDataset
+
+  set_cls:
+    _target_: datasets.prot.swissprot.SPSetDataset
+
+backbone:
+  _target_: backbones.fcnet.EnFCNet
+
+concept_mask:
+  _target_: datasets.prot.concept_gen.LinkageConcepts
+  n_concepts: 162
+  data_path: data/comet/swissprot/linkage.pt
+  n_feats: 1280
+  top_k: 400
+
+
+# For baseline, how many total classes
+train_classes: 7195
+
+n_way: 5
+n_shot: 5
+n_query: 16
