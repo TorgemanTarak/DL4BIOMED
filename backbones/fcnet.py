@@ -47,7 +47,6 @@ class EnFCNet(nn.Module):
         self.bn1 = nn.BatchNorm1d(self.num_GOs)
         self.bn2 = nn.BatchNorm1d(self.num_GOs)
         self.final_feat_dim = z_dim
-        self.bool = True
         
     def generate_masks(self, x):
         batch, num_genes = x.shape
@@ -67,13 +66,6 @@ class EnFCNet(nn.Module):
         x = x.view(1, batch, -1)
         # x after applying mask: (numGOs, batch, numGenes)
         x = self.masks * x
-
-        if self.bool:
-            print(x.shape)
-            print((x !=0).sum()/batch)
-            print(self.masks.shape)
-            print("AAAAAAAAAAAAAAAAAAa")
-            self.bool = False
 
         # change to (batch, numGOs, numGenes)
         x = x.permute(1, 2, 0)
