@@ -16,10 +16,10 @@ backbone:
 
 concept_mask:
   _target_: datasets.cell.concept_gen.PCAConcepts
-  n_concepts: 8
+  n_concepts: 162
   data_path: data/comet/tabula_muris/TM_PCA_components.pt
   n_feats: 2866
-  top_k: 400
+  top_k: 235
   type: original_comet
 
 
