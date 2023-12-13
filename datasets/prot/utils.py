@@ -10,7 +10,7 @@ from goatools.anno.gaf_reader import GafReader
 
 from dataclasses_json import dataclass_json
 from dataclasses import dataclass
-
+from tqdm import tqdm
 
 from sklearn.preprocessing import LabelEncoder
 
@@ -85,7 +85,7 @@ def get_samples_using_ic(root):
 
     term_frequency, max_freq = get_term_frequency(root, reader)
 
-    for i in fasta:
+    for i in tqdm(fasta):
         entry = i.id.split("|")[1]
         try:
             annots = reader[entry]

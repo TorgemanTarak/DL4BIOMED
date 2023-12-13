@@ -1,5 +1,5 @@
 defaults:
-  - dataset: swissprot
+  - dataset: swissprot_comet
   - method: comet
 
 model: EnFCNet
